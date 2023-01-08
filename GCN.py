@@ -28,7 +28,7 @@ from GCN_custom import MyOwnDataset
 # dataset = Planetoid(path, args.dataset, transform=T.NormalizeFeatures())
 dataset = MyOwnDataset(root='.', transform=T.NormalizeFeatures())
 data = dataset[0]
-print(dataset.num_classes)
+
 for lr in lrs:
     class GCN(torch.nn.Module):
         def __init__(self, in_channels, hidden_channels, out_channels):
@@ -37,7 +37,6 @@ for lr in lrs:
             self.conv2 = GCNConv(hidden_channels, out_channels, cached=True, normalize=False)
 
         def forward(self, x, edge_index, edge_weight=None):
-            # x가 NoneType인 문제가 있다.
             x = F.dropout(x, p=0.5, training=self.training)
             x = self.conv1(x, edge_index, edge_weight).relu()
             x = F.dropout(x, p=0.5, training=self.training)
@@ -72,7 +71,6 @@ for lr in lrs:
         return accs
 
 
-    print(dataset.num_classes)
     best_val_acc = final_test_acc = 0
     for epoch in range(1, args.epochs + 1):
         loss = train()
