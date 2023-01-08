@@ -1,0 +1,27 @@
+certifi @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_477u68wvzm/croot/certifi_1671487773341/work/certifi
+charset-normalizer==2.1.1
+idna==3.4
+Jinja2==3.1.2
+joblib==1.2.0
+MarkupSafe==2.1.1
+numpy==1.24.1
+pandas==1.5.2
+psutil==5.9.4
+pyg-lib==0.1.0+pt113
+pyparsing==3.0.9
+python-dateutil==2.8.2
+pytz==2022.7
+requests==2.28.1
+scikit-learn==1.2.0
+scipy==1.9.3
+six==1.16.0
+threadpoolctl==3.1.0
+torch==1.13.1
+torch-cluster==1.6.0
+torch-geometric==2.2.0
+torch-scatter==2.1.0
+torch-sparse==0.6.16
+torch-spline-conv==1.2.1
+tqdm==4.64.1
+typing_extensions==4.4.0
+urllib3==1.26.13
