@@ -29,7 +29,7 @@ class MyOwnDatasetToDo(InMemoryDataset):
         """
         :param path: tsv 파일이 있는 위치
         :param is_undirected: undirected 라면 edge_index를 to_undirected함수를 통해서 바꿔줘야 한다.
-        :return: edge_index를 리턴해준다.
+        :return: edge_index를 리턴해준다.(tensor shape: [2, edge수]
         """
 
 
