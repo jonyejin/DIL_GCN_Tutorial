@@ -6,8 +6,8 @@ import pandas as pd
 import numpy as np
 import os.path as osp
 
-
-class MyOwnDataset(InMemoryDataset):
+# TODO: Fill in this class
+class MyOwnDatasetToDo(InMemoryDataset):
     def __init__(self, root, transform=None, pre_transform=None, pre_filter=None):
         super().__init__(root, transform, pre_transform, pre_filter)
         self.data, self.slices = torch.load(self.processed_paths[0])
@@ -24,56 +24,21 @@ class MyOwnDataset(InMemoryDataset):
     def processed_file_names(self):
         return ['data.pt']
 
-    # def download(self):
-    #     # Download to `self.raw_dir`.
-    #     download_url(url, self.raw_dir)
-    #     ...
-
     @staticmethod
     def load_edge_index_from_tsv(path='Data Files/adjacency.tsv', is_undirected=True):
         """
-        @param node_names: name of nodes(Integer)
-        @return:[Tensor] (shape: [2, num_edges])
+        :param path: tsv 파일이 있는 위치
+        :param is_undirected: undirected 라면 edge_index를 to_undirected함수를 통해서 바꿔줘야 한다.
+        :return: edge_index를 리턴해준다.
         """
 
-        df = pd.read_csv(path, '\t', header=None, names=["node1", "node2"], usecols=["node1", "node2"])
-        edge_index = torch.from_numpy(df.to_numpy())
-        edge_index = edge_index.t()
-        if is_undirected:
-            # generate other direction of edge index
-            edge_index = to_undirected(edge_index)
-        return edge_index
 
     def process(self):
-        # Read data into huge `Data` list.
-        df = pd.read_csv('Data Files/labels.tsv', header=None)
-        _y = torch.from_numpy(df.to_numpy().astype('float32')).squeeze().type(torch.LongTensor)
-        feature_vectors = pd.read_csv('Data Files/cora.content.csv', '\t', header=None).iloc[:, 1:-1]
-        _x = torch.from_numpy(feature_vectors.to_numpy().astype('float32'))
-
-        data = Data(x=_x, edge_index=self.load_edge_index_from_tsv(), y=_y)
-        # undirected feature
-
-        # train, val, test
-        train_masks, val_masks, test_masks = [], [], []
-        # for i in range(10):
-        name = f'cora_split_0.6_0.2_{0}.npz'
-        splits = np.load(osp.join(self.raw_dir, name))
-
-        data.train_mask = torch.from_numpy(splits['train_mask'])
-        data.val_mask = torch.from_numpy(splits['val_mask'])
-        data.test_mask = torch.from_numpy(splits['test_mask'])
-
-        data_list = [data]
-
-        if self.pre_filter is not None:
-            data_list = [data for data in data_list if self.pre_filter(data)]
-
-        if self.pre_transform is not None:
-            data_list = [self.pre_transform(data) for data in data_list]
-
-        data, slices = self.collate(data_list)
-        torch.save((data, slices), self.processed_paths[0])
+        """
+        Data 객체를 만들어 준다.
+        :return: None
+        """
 
 
-m = MyOwnDataset('.')
+
+m = MyOwnDatasetToDo('.')

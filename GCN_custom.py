@@ -55,8 +55,6 @@ class MyOwnDataset(InMemoryDataset):
         # undirected feature
 
         # train, val, test
-        train_masks, val_masks, test_masks = [], [], []
-        # for i in range(10):
         name = f'cora_split_0.6_0.2_{0}.npz'
         splits = np.load(osp.join(self.raw_dir, name))
 
